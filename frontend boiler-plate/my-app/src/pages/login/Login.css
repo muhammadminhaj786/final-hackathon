@@ -1,0 +1,187 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    
+}
+.my-bg{
+    background-image: url("../../assets/unnamed.png");
+    background-position: center;        
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 50%;
+}
+.main-heading{
+  font-size: 7vh;
+  font-weight: bold;
+  text-align: center;
+}
+.tag{
+  font-size: 2.5vh;
+  text-align: center;
+}
+.main-para{
+  font-size: 2.7  vh ;
+  margin-top: 16px;
+}
+.Inner{
+  /* w-[80%] h-[80%] mx-auto mt-10 */
+  width: 80%;
+  height: 80%;
+  margin: 0px auto;
+  margin-top: 40px;
+}
+
+.main-screen{
+  width: 100%;
+  /* margin-top: 4%; */
+  height: 100vh;
+  /* border: 2px solid red; */
+  display: flex;
+}
+.inp{
+  width: 80%;
+  padding: 12px;
+  margin: 0px auto;
+  margin-top: 8px;
+}
+.main-heading-2{
+  font-size: 5vh;
+  margin-top: 20px;
+  color: green;
+  font-weight: bold;
+  text-align: center;
+}
+.main-para-2{
+  font-size: 3vh;
+  width: 80%;
+  text-align: center;
+  margin: 0px auto;
+  margin-top: 16px;
+  color: rgb(156 163 175)
+}
+.btn{
+  width: 80%;
+  margin-top: 10px;
+}
+.down-field{
+  width: 80%;
+  margin: 0px auto;
+  margin-top: 4px;
+  padding: 8px;
+}
+.inp3{
+    /* text-align: center; */
+    color: orange;
+}
+.link1{
+  color: orange;
+  font-size: 1.6svw;
+  font-weight: bold;
+  text-decoration: none;
+}
+.second-screen{
+  width: 50%;
+  height: 100%;
+  /* border: 2px solid blue; */
+}
+.btn{
+  margin: 0px auto;
+  padding: 8px;
+}
+.login-btn{
+  background-color: green !important;
+  height: 45px;
+  width: 100%;
+  border-radius: 25px;
+  color: white;
+  border: none;
+  /* font-size: 1.7vw; */
+}
+@media only screen and (max-width: 580px) {
+    
+    .ctns{
+      margin-top: 60%;
+    }
+    .main-heading{
+      font-size: 6vw;
+    }
+    .tag{
+      font-size: 2.7vw;
+    }
+    .main-para{
+      font-size: 2.7vw;
+      text-align: center;
+    }
+    .main-para-2{
+      font-size: 2.5vw;
+    }
+    .down-field{
+      width: 100%;
+      /* gap: 20px; */
+    }
+    .inp2{
+      font-size: 1.8vw;
+    }
+    .link1{
+      font-size: 2.7vw;
+    }
+  }
+
+  @media only screen and (max-width: 450px) {
+    .main-screen{
+      width: 100%;
+      /* margin-top: 10%; */
+      display: block;
+      /* border: 2px solid black; */
+      
+    }
+    .my-bg{
+      width: 100%;
+      height: 30%;
+    }
+    .ctns{
+      /* margin-top: 60%; */
+      margin-top: 0px;
+    }
+    .main-heading{
+      font-size: 4vh;
+    }
+    .tag{
+      font-size: 2.3vh;
+    }
+    .main-para{
+      font-size: 2.1vh;
+      width: 95%;
+      margin: 3px auto;
+      text-align:  center;
+    }
+    .inp{
+      width: 100%;   
+    }
+    .main-heading-2{
+      font-size: 5.5vw;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .main-para-2{
+      font-size: 2vh;
+      width: 100%;
+      text-align: start;
+    }
+    .btn{
+      width: 100%;
+      margin-top: 2px;
+    }
+    .down-field{
+      width: 100%;
+    }
+    .inp2{
+      font-size: 1.7vh;
+    }
+    .link1{
+      font-size: 2.9vw;
+    }
+    .second-screen{
+      width: 100%;
+    }
+  }
