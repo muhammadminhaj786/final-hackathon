@@ -151,6 +151,7 @@ const checkIn = async (req,res) =>{
       }
 }
 
+//get all attendence api
 const getAttendence = async (req,res) =>{
     try {
         const userRec = await attModel.find({})
@@ -171,6 +172,24 @@ const getAttendence = async (req,res) =>{
     }
 }
 
+//get only one user api
+const oneUser = async (req,res)=>{
+  try {
+    const {id} = req.params
+    const userRef = await userModel.findById(id)
+    res.status(200).send({
+      message: "Get user",
+      data: userRef
+    })
+  } catch (error) {
+    res.json({
+      status: false,
+      message: "did'nt get user",
+      data: null
+    })
+  }
+  
+}
 
 
 
@@ -179,6 +198,7 @@ const getAttendence = async (req,res) =>{
     LoginController,
     getUser,
     checkIn,
-    getAttendence
+    getAttendence,
+    oneUser
   };
   

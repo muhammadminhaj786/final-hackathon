@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoMdPerson, IoIosCalendar } from 'react-icons/io';
 import { BaseUrl } from '../../config';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { ConsoleLogEntry } from 'selenium-webdriver/bidi/logEntries';
 
 const Admin = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -19,6 +20,8 @@ const Admin = () => {
     rollNO: '',
     file: null,
   });
+  const [data,setData] = useState([])
+  const [temp, setTemp] = useState([])
 
   //logout function
   const logoutFunc =()=>{
@@ -101,6 +104,24 @@ const Admin = () => {
     closeModal();
   };
 
+  
+  
+
+  //get single user
+  const singleUser =async ()=>{
+    const id = localStorage.getItem("ID")
+    console.log(id)
+    const response = await axios.get(`${BaseUrl}/api/user/${id}`)
+    console.log(response.data.data)
+    setData(response.data.data)
+    setTemp((prevData)=>[...prevData, ...Object.values(response.data.data)])
+  }
+  console.log(temp)
+
+  useEffect(()=>{
+    singleUser()
+  },[])
+console.log(data)
   return (
     <div className="flex h-[100%]  ">
       {/* Left Sidebar */}
@@ -229,11 +250,27 @@ const Admin = () => {
           
 
             {currentPage === 'Students' ? (
-              <div className=' w-[60%] h-[450px] mx-auto '>
-                <div style={{border:"2px solid black"}} className='w-[40%] mx-auto  rounded-[55%] h-[50%]'>l</div>
+              // temp.map((pro,i)=>{
+              //   return(
+              //     <div key={i} className='w-[550px] h-[450px] mx-auto '>
+              //     <div style={{border:"2px solid black"}} className='w-[40%] mx-auto  rounded-[55%] h-[50%]'>
+              //       <img src={} alt="" />
+              //     </div>
+              //     <div className=' pl-[38%] '>
+              //       <div className='mt-7 text-2xl'>{temp[1]}</div>
+              //       <div className='mt-4 text-2xl'>{temp[2]}</div>
+              //       <div className='mt-4 text-2xl'>Computer Science</div>
+              //     </div>
+              //   </div>
+              //   )
+              // })
+              <div className='w-[550px] h-[450px] mx-auto '>
+                <div  className='w-[40%] mx-auto  rounded-[55%] h-[50%]'>
+                  <img className='w-[100%] h-[100%] rounded-[55%]' src={temp[4]} alt="" />
+                </div>
                 <div className=' pl-[38%] '>
-                  <div className='mt-7 text-2xl'>full name</div>
-                  <div className='mt-4 text-2xl'>email</div>
+                  <div className='mt-7 text-2xl'>{temp[1]}</div>
+                  <div className='mt-4 text-2xl'>{temp[2]}</div>
                   <div className='mt-4 text-2xl'>Computer Science</div>
                 </div>
               </div>
