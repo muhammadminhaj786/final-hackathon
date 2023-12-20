@@ -274,6 +274,7 @@ const Admin = () => {
               <div className="w-1/6">ID</div>
               <div className="w-1/6">Profile Img</div>
               <div className="w-1/6">Roll No</div>
+              <div className="w-1/6">Full Name</div>
               </div>
               </>
             )}
@@ -294,10 +295,12 @@ const Admin = () => {
             ):(
               attendenceData.map((att,i)=>{
                 return(
-                  <div key={i} className="flex border-b py-2">
+                  <div key={i} className="flex  py-2">
               <div className="w-1/6">{i+1}</div>
-              <div className="w-1/6 ml-2"><img src={att.imageUrl} alt="" /></div>
-              <div className="w-1/6 ml-3">{att.roll_No}</div>
+              <div className="pl-2 h-[70px] w-[80px] rounded-[35px] ml-2"><img className='w-[100%] h-[100%] rounded-[35px]' src={att.imageUrl} alt="" /></div>
+
+              <div className="w-1/6 ml-[9%] font-bold mt-4">{att.roll_No}</div>
+              <div className="w-1/6 ml-[1%] font-bold mt-4">{att.full_Name}</div>
               </div>
                 )
               })

@@ -16,6 +16,12 @@ const schema = new mongoose.Schema({
   },
   token:{
     type: String
+  },
+  id:{
+    type: String
+  },
+  full_Name:{
+    type: String
   }
 },
 { timestamps: true }

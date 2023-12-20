@@ -22,6 +22,11 @@ const Admin = () => {
   });
   const [data,setData] = useState([])
   const [temp, setTemp] = useState([])
+  const [attendenceData,setAttendenceData]=useState([])
+    
+  const id = localStorage.getItem("ID")
+    console.log(id)
+
 
   //logout function
   const logoutFunc =()=>{
@@ -60,7 +65,6 @@ const Admin = () => {
   //     [name]: name === 'file' ? file : value,
   //   });
   // };
-
   // Handle form submission (you can customize this according to your needs)
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -86,6 +90,8 @@ const Admin = () => {
     //  formData.append("email",email)
     //  formData.append("password",password)
      formData.append("rollNo",rollNo)
+     formData.append("id",id)
+     formData.append("fullName",fullName)
 
       const response = await axios.post(`${BaseUrl}/api/checkin`, formData,{
               headers: {
@@ -95,6 +101,7 @@ const Admin = () => {
       );
       localStorage.setItem("token",response.data.data.token)
       localStorage.setItem("attendence",response.data.data.attendence)
+      fetchAtt()
       console.log(response.data.data)
     }
     catch (error) {
@@ -104,15 +111,13 @@ const Admin = () => {
     closeModal();
   };
 
-  
-  
 
   //get single user
   const singleUser =async ()=>{
-    const id = localStorage.getItem("ID")
-    console.log(id)
+    
     const response = await axios.get(`${BaseUrl}/api/user/${id}`)
     console.log(response.data.data)
+    setFullName(response.data.data.full_Name)
     setData(response.data.data)
     setTemp((prevData)=>[...prevData, ...Object.values(response.data.data)])
   }
@@ -122,6 +127,16 @@ const Admin = () => {
     singleUser()
   },[])
 console.log(data)
+
+const fetchAtt = async ()=>{
+  const response = await axios.get(`${BaseUrl}/api/attendence`)
+  console.log(response.data.data)
+  setAttendenceData([...response.data.data])
+}
+
+useEffect(()=>{
+  fetchAtt()
+},[])
   return (
     <div className="flex h-[100%]  ">
       {/* Left Sidebar */}
@@ -250,20 +265,20 @@ console.log(data)
           
 
             {currentPage === 'Students' ? (
-              // temp.map((pro,i)=>{
-              //   return(
-              //     <div key={i} className='w-[550px] h-[450px] mx-auto '>
-              //     <div style={{border:"2px solid black"}} className='w-[40%] mx-auto  rounded-[55%] h-[50%]'>
-              //       <img src={} alt="" />
-              //     </div>
-              //     <div className=' pl-[38%] '>
-              //       <div className='mt-7 text-2xl'>{temp[1]}</div>
-              //       <div className='mt-4 text-2xl'>{temp[2]}</div>
-              //       <div className='mt-4 text-2xl'>Computer Science</div>
-              //     </div>
-              //   </div>
-              //   )
-              // })
+              <></>
+            ) : (
+              <>
+                <div className="flex  bg-green-400 p-3 rounded-lg">
+              <div className="w-1/6">ID</div>
+              <div className="w-1/6">Profile Img</div>
+              <div className="w-1/6">Roll No</div>
+              <div className="w-1/6 ml-5">Full Name</div>
+              </div>
+              </>
+            )}
+          {/* Placeholder data (replace with actual data) */}
+          {
+            currentPage === 'Students' ?(
               <div className='w-[550px] h-[450px] mx-auto '>
                 <div  className='w-[40%] mx-auto  rounded-[55%] h-[50%]'>
                   <img className='w-[100%] h-[100%] rounded-[55%]' src={temp[4]} alt="" />
@@ -274,42 +289,21 @@ console.log(data)
                   <div className='mt-4 text-2xl'>Computer Science</div>
                 </div>
               </div>
-            ) : (
-              <>
-                <div className="flex  bg-green-400 p-3 rounded-lg">
-              <div className="w-1/6">ID</div>
-              <div className="w-1/6">Profile Img</div>
-              <div className="w-1/6">Roll No</div>
-              </div>
-              </>
-            )}
-          {/* Placeholder data (replace with actual data) */}
-          {/* {
-            currentPage === 'Students' ?(
-              data.map((students,index)=>{
-                return students.user_type == "student" &&(
-                  <div key={index} className="flex border-b py-2">
-              <div className="pl-3 pt-5 w-1/6">{index+1}</div>
-              <div className="pl-2 h-[70px] w-[80px] rounded-[35px] ml-2"><img className='w-[100%] h-[100%] rounded-[35px]' src={students.imageUrl} alt="" /></div>
-              <div className="pl-[8%] pt-5 w-1/6 ml-3">{students.full_Name}</div>
-              <div className="pl-[5%] pt-5 w-1/6 ml-3">{students.email}</div>
-              </div>
-                )
-              }
-              )
             ):(
               attendenceData.map((att,i)=>{
-                return(
-                  <div key={i} className="flex border-b py-2">
+                return att.id==id && (
+                  <div key={i} className="flex  py-2">
               <div className="w-1/6">{i+1}</div>
-              <div className="w-1/6 ml-2"><img src={att.imageUrl} alt="" /></div>
-              <div className="w-1/6 ml-3">{att.roll_No}</div>
+              <div className="pl-2 h-[70px] w-[80px] rounded-[35px] ml-2"><img className='w-[100%] h-[100%] rounded-[35px]' src={att.imageUrl} alt="" /></div>
+
+              <div className="w-1/6 ml-[9%] font-bold mt-4">{att.roll_No}</div>
+              <div className="w-1/6 ml-[3%] font-bold mt-4">{att.full_Name}</div>
               </div>
                 )
               })
             )
             
-          } */}
+          }
           
         </div>
         </div>

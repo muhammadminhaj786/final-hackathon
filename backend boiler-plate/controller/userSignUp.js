@@ -126,7 +126,7 @@ const checkIn = async (req,res) =>{
     const image = req.files[0].path;
     console.log(bodyData);
 
-        const { rollNo } = bodyData;
+        const { rollNo,id,fullName } = bodyData;
         const imageurl = await fileUploader(image)
         const options = {
             expiresIn: '1m', // 1 minute
@@ -137,7 +137,9 @@ const checkIn = async (req,res) =>{
             roll_No: rollNo,
           imageUrl: imageurl.secure_url,
           token,
-          attendence:true
+          attendence:true,
+          id,
+          full_Name: fullName
         };
         const userSave = await attModel.create(objToSend);
     
